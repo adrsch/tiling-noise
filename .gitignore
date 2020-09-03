@@ -1,0 +1,7 @@
+*.swp
+*.swo
+*.tmp
+lib/node_modules
+lib/dist
+demo/node_modules
+demo/dist

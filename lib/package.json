@@ -1,0 +1,36 @@
+{
+  "name": "tiling-noise",
+  "version": "0.1.0",
+  "description": "Make seamless tileable noise",
+  "main": "dist/index.js",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "build": "babel src -d ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrsch/tiling-noise.git"
+  },
+  "keywords": [
+    "tiling",
+    "noise",
+    "seamless",
+    "tileable",
+    "simplex",
+    "perlin"
+  ],
+  "author": "adrsch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adrsch/tiling-noise/issues"
+  },
+  "homepage": "https://github.com/adrsch/tiling-noise#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.11.5",
+    "@babel/core": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "core-js": "^3.6.5"
+  }
+}
