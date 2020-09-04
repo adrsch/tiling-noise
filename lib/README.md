@@ -6,34 +6,42 @@ Works by mapping coordinates to a [Clifford torus](https://en.wikipedia.org/wiki
 Use with your favorite 4D noise library
 ```
 npm i tiling-noise
-
 ```
 Or use with one of these
 ```
 npm i tiling-noise open-simplex-noise
 npm i tiling-noise simplex-noise
 npm i tiling-noise asm-noise
-npm i tiling-noise tumult
 ```
 ## Usage
 Requires a 4d noise function `noise4D(x, y, z, w)` from a library such as those above
 ```
 import makeTilingNoise from 'tiling-noise';
 
+// Using open-simplex-noise:
+import { makeNoise4D } from 'open-simplex-noise';
+const noise4D = makeNoise4D(Date.now());
+
+// Using simplex-noise:
+import SimplexNoise from 'simplex-noise';
+const simplex = new SimplexNoise();
+const noise4D = (x, y, z, w) => simplex.noise4D(x, y, z, w);
+
+// Using asm-noise:
+const noise4D = require('asm-noise');
+
 const tilingNoise = makeTilingNoise({
-  width: tileWidth, // Required
-  height: tileHeight, // Required
-  noise4D: noise4D, // Required
-  stretch: 1, // Stretches circle used mapping to torus - can be done per axis:
-// stretch: [xStrech, yStretch, zStretch, wStretch],
-  offset: 0, // Offset in 4d space of mapping - can be done per axis:
-// offset: [0, 0, 0, 0],
+  width: tileWidth, // required
+  height: tileHeight, // required
+  noise4D: noise4D, // required
+  stretch: 1, // or [xStrech, yStretch, zStretch, wStretch], stretches circle in torus mapping, uniform or per axis
+  offset: 0, // or [xOffset, yOffset, zOffset, wOffset], offset in 4D space, uniform or per axis
 });
 
 const noise = tilingNoise(x, y);
 ```
-Full example (with open-simplex-noise):
-stretch10.png
+Full example (with open-simplex-noise):  
+![](https://raw.githubusercontent.com/adrsch/tiling-noise/master/images/stretch10.png)
 ```
 import makeTiling from 'tiling-noise';
 import { makeNoise4D } from 'open-simplex-noise';
@@ -66,34 +74,11 @@ for (let x = 0; x < width; x++) {
   }
 }
 ctx.putImageData(img, 0, 0);
-Using open-simplex-noise:
 ```
-import { makeNoise4D } from 'open-simplex-noise';
-const noise4D = makeNoise4D(Date.now());
-```
-Using simplex-noise:
-```
-import SimplexNoise from 'simplex-noise';
-const simplex = new SimplexNoise();
-const noise4D = (x, y, z, w) => simplex.noise4D(x, y, z, w);
-```
-Using asm-noise:
-```
-const noise4D = require('asm-noise');
-```
-Stretch examples:  
-1  
-stretch1.png
-10  
-stretch10.png  
-100  
-stretch100.png
-[10, 1] or [10, 1, 10, 1]  
-verticalstretch.png
-[10, 1, 1, 10]
-ellipses.png
 
-Offset animated:
+### Offset (& Animation)
+Offset animated:  
+![](https://raw.githubusercontent.com/adrsch/tiling-noise/master/images/basicanimated.gif)  
 ```
 let time = 0;
 setInterval(() => {
@@ -120,7 +105,19 @@ setInterval(() => {
 }, 100);
 ```
 Effect of switching between incrementing each component of offset in equal time intervals:  
-offsetcomponents.gif
-Setting stretch to [time, 1, 1, time]:  
-stretchanimated.gif
+![](https://raw.githubusercontent.com/adrsch/tiling-noise/master/images/offsetcomponents.gif)  
+### Stretch
+`stretch: 1`  
+![](https://raw.githubusercontent.com/adrsch/tiling-noise/master/images/stretch1.png)  
+`stretch: 10`  
+![](https://raw.githubusercontent.com/adrsch/tiling-noise/master/images/stretch10.png)  
+`stretch: 100`  
+![](https://raw.githubusercontent.com/adrsch/tiling-noise/master/images/stretch100.png)  
+`stretch: [10, 1]` or `stretch: [10, 1, 10, 1]`  
+![](https://raw.githubusercontent.com/adrsch/tiling-noise/master/images/verticalstretch.png)  
+`stretch: [10, 1, 1, 10]`  
+![](https://raw.githubusercontent.com/adrsch/tiling-noise/master/images/ellipses.png)  
+
+Setting `stretch: [time, 1, 1, time]`   
+![](https://raw.githubusercontent.com/adrsch/tiling-noise/master/images/stretchanimated.gif)  
 
