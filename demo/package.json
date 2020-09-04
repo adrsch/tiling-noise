@@ -20,7 +20,11 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "asm-noise": "^1.0.1",
     "core-js": "^3.6.5",
-    "open-simplex-noise": "^2.4.0-pre4"
+    "open-simplex-noise": "^2.4.0-pre4",
+    "simplex-noise": "^2.4.0",
+    "tiling-noise": "^0.1.0",
+    "tumult": "^3.0.14"
   }
 }
