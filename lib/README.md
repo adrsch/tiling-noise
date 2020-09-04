@@ -34,8 +34,10 @@ const tilingNoise = makeTilingNoise({
   width: tileWidth, // required
   height: tileHeight, // required
   noise4D: noise4D, // required
-  stretch: 1, // or [xStrech, yStretch, zStretch, wStretch], stretches circle in torus mapping, uniform or per axis
-  offset: 0, // or [xOffset, yOffset, zOffset, wOffset], offset in 4D space, uniform or per axis
+  // Constant used to stretch circle in torus mapping, uniform or per axis
+  stretch: 1, // or [xStrech, yStretch, zStretch, wStretch]
+  // Offset constant in 4D space, uniform or per axis
+  offset: 0, // or [xOffset, yOffset, zOffset, wOffset]
 });
 
 const noise = tilingNoise(x, y);
